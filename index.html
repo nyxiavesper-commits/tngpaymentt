@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPP76 PAYMENT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #0a0b0d; color: white; font-family: sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; }
+        .btn-blue { background: linear-gradient(90deg, #007bff, #00d4ff); transition: 0.3s; }
+        .btn-blue:hover { opacity: 0.8; }
+        .hidden { display: none; }
+        .social-box { background-color: #121214; border: 1px solid #1f1f22; transition: 0.3s; }
+        .social-box:hover { background-color: #1c1c1f; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-4">
+
+    <div id="screen-main" class="w-full max-w-md text-center mt-10">
+        <div class="relative inline-block">
+            <img src="https://files.catbox.moe/zj690i.jpg" alt="Profile" class="w-24 h-24 rounded-full border-4 border-cyan-500 object-cover">
+            <div class="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1 border-2 border-black">
+                <svg class="w-3 h-3 text-white fill-current" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+            </div>
+        </div>
+        
+        <h1 class="text-2xl font-bold italic mt-4 tracking-widest uppercase">Payment</h1>
+        <p class="text-gray-400 text-sm">@repp76</p>
+
+        <div class="mt-6 px-2">
+            <img src="https://files.catbox.moe/axqd0l.png" alt="Banner" class="w-full h-48 object-cover rounded-xl border border-gray-700">
+        </div>
+
+        <div class="mt-8 space-y-4">
+            <p class="text-xs text-gray-400 uppercase font-bold tracking-tighter">Choose Payment Methods: <span class="text-gray-600">ALL PAYMENT</span></p>
+            
+            <button onclick="showScreen('screen-dana')" class="btn-blue w-full py-4 rounded-xl flex items-center justify-center font-bold">
+                <i class="fas fa-wallet mr-2"></i> DUITNOW PAYMENT
+            </button>
+            
+            <button onclick="showScreen('screen-qris')" class="w-full py-4 rounded-xl border border-gray-700 bg-zinc-900 flex items-center justify-center font-bold">
+                <i class="fas fa-qrcode mr-2"></i> TOUCH N GO INSTANT
+            </button>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 mt-10 px-2">
+            <a href="https://www.instagram.com/whozarep02" target="_blank" class="social-box p-4 rounded-xl flex justify-center items-center">
+                <i class="fab fa-instagram text-xl"></i>
+            </a>
+            <a href="https://wa.me/601120961960" target="_blank" class="social-box p-4 rounded-xl flex justify-center items-center">
+                <i class="fab fa-whatsapp text-xl text-green-500"></i>
+            </a>
+            <a href="https://t.me/repp76" target="_blank" class="social-box p-4 rounded-xl flex justify-center items-center">
+                <i class="fab fa-telegram-plane text-xl text-blue-400"></i>
+            </a>
+            <a href="https://t.me/NVTeamOffc" target="_blank" class="social-box p-4 rounded-xl flex justify-center items-center">
+                <i class="fas fa-user-secret text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <div id="screen-dana" class="w-full max-w-md hidden pt-10">
+        <button onclick="showScreen('screen-main')" class="bg-zinc-800 px-6 py-2 rounded-lg mb-6 font-bold text-sm">
+            <i class="fas fa-arrow-left mr-2"></i> BACK
+        </button>
+
+        <div class="glass-card p-10 flex flex-col items-center text-center">
+            <i class="fas fa-fingerprint text-5xl text-cyan-400 mb-4"></i>
+            <p class="text-gray-400 font-bold text-sm tracking-widest">DuitNow RECEIVER</p>
+            <h2 id="dana-number" class="text-3xl font-bold my-4 tracking-wider">181837537347</h2>
+            <p class="text-sm font-bold text-gray-300 uppercase">DuitNow</p>
+        </div>
+
+        <button onclick="copyNumber()" class="btn-blue w-full py-4 rounded-xl font-bold mt-10 shadow-lg">
+            COPY NUMBER
+        </button>
+    </div>
+
+    <div id="screen-qris" class="w-full max-w-md hidden pt-10">
+        <button onclick="showScreen('screen-main')" class="bg-zinc-800 px-6 py-2 rounded-lg mb-6 font-bold text-sm">
+            <i class="fas fa-arrow-left mr-2"></i> BACK
+        </button>
+
+        <div class="bg-white p-4 rounded-3xl overflow-hidden shadow-2xl">
+            <img src="https://files.catbox.moe/enl8lt.jpg" alt="QRIS" class="w-full">
+        </div>
+
+        <button onclick="alert('Gambar sedang didownload...')" class="btn-blue w-full py-4 rounded-xl font-bold mt-10">
+            SAVE QRCODE
+        </button>
+    </div>
+
+    <div class="mt-auto py-10 text-center">
+        <p class="text-gray-500 text-[10px] tracking-[0.3em] uppercase">Web Developed By</p>
+        <p class="text-gray-400 font-bold tracking-widest">@repp76</p>
+    </div>
+
+    <script>
+        function showScreen(screenId) {
+            document.getElementById('screen-main').classList.add('hidden');
+            document.getElementById('screen-dana').classList.add('hidden');
+            document.getElementById('screen-qris').classList.add('hidden');
+            document.getElementById(screenId).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function copyNumber() {
+            const numText = document.getElementById('dana-number').innerText;
+            const cleanNum = numText.replace(/-/g, '').replace(/\s/g, '');
+            navigator.clipboard.writeText(cleanNum).then(() => {
+                alert("Nomor Dana " + cleanNum + " berhasil disalin!");
+            });
+        }
+    </script>
+</body>
+</html>
+
